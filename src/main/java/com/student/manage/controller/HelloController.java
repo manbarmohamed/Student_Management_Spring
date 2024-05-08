@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
+import java.util.List;
 
 @Controller
 public class HelloController {
@@ -52,10 +53,24 @@ public class HelloController {
         modelMap.addAttribute("add","Welcome to Insert page");
         return "redirect:/show";
     }
-    @GetMapping(value = "/edit")
-    public String EditStudent(ModelMap modelMap){
-        modelMap.addAttribute("edit","Welcome to Edit page");
+    @GetMapping(value = "/edit/{id}")
+    public String EditStudent(@PathVariable("id") int id, ModelMap modelMap) throws SQLException {
+        StudentDAO studentDAO = new StudentDAOImp();
+        List<Student> students = studentDAO.selectBiId(id);
+        modelMap.addAttribute("student", students);
         return "EditStudent";
+    }
+
+    @PostMapping(value = "/edit/{id}")
+    public String EditedStudent(@PathVariable("id") int id,
+                                @RequestParam("firstName") String fname,
+                                @RequestParam("lastName") String lname,
+                                @RequestParam("email") String email,
+                                @RequestParam("status") String status) throws SQLException {
+        StudentDAO studentDAO = new StudentDAOImp();
+        Student std = new Student(id, fname, lname, email, status);
+        studentDAO.update(std);
+        return "redirect:/show";
     }
     @GetMapping(value = "/delete/{id}")
     public String DeleteStudent(@PathVariable("id") int id, ModelMap modelMap) throws SQLException {

@@ -45,7 +45,7 @@
                 <a href="add">add</a>
 
                 <a href="delete/${std.id_Student}">delete</a>
-                <a href="edit?id=${std.id_Student}">edite</a>
+                <a href="edit/${std.id_Student}">edite</a>
             </td>
         </tr>
     </c:forEach>
