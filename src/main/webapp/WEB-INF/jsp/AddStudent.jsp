@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: user
@@ -11,6 +12,19 @@
     <title>Title</title>
 </head>
 <body>
-<h1>${add}</h1>
+<h2>HTML Forms</h2>
+
+<form action="<c:url value='/add'/>" method="post">
+    <label for="fname">First name:</label><br>
+    <input type="text" id="fname" name="firstName"><br>
+    <label for="lname">Last name:</label><br>
+    <input type="text" id="lname" name="lastName"><br><br>
+
+    <label for="email">Email:</label><br>
+    <input type="text" id="email" name="email"><br><br>
+    <label for="st">Status:</label><br>
+    <input type="text" id="st" name="status"><br><br>
+    <input type="submit" value="Submit">
+</form>
 </body>
 </html>

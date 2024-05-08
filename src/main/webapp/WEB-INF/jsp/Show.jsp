@@ -42,6 +42,8 @@
             <td>${std.email}</td>
             <td>${std.status}</td>
             <td>
+                <a href="add">add</a>
+
                 <a href="delete/${std.id_Student}">delete</a>
                 <a href="edit?id=${std.id_Student}">edite</a>
             </td>

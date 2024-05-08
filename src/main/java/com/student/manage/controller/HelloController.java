@@ -2,12 +2,10 @@ package com.student.manage.controller;
 
 import com.student.manager.DAO.StudentDAO;
 import com.student.manager.DAO.StudentDAOImp;
+import com.student.manager.model.Student;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
@@ -38,9 +36,21 @@ public class HelloController {
         return "Show";
     }
     @GetMapping(value = "/add")
-    public String AddStudent(ModelMap modelMap){
-        modelMap.addAttribute("add","Welcome to Insert page");
+    public String addStudentPage() {
         return "AddStudent";
+    }
+    @PostMapping(value = "/add")
+    public String AddStudent(@RequestParam("firstName") String fname,
+                             @RequestParam("lastName") String lname,
+                             @RequestParam("email") String email,
+                             @RequestParam("status") String status,
+                             ModelMap modelMap) throws SQLException {
+
+        Student std = new Student(fname,lname,email,status);
+        StudentDAO st = new StudentDAOImp();
+        st.insert(std);
+        modelMap.addAttribute("add","Welcome to Insert page");
+        return "redirect:/show";
     }
     @GetMapping(value = "/edit")
     public String EditStudent(ModelMap modelMap){
