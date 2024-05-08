@@ -13,7 +13,7 @@ import java.util.List;
 public class StudentDAOImp implements StudentDAO {
 
     private String SELECT_ALL_STUDENTS = "select * from student";
-    private String INSERT_STUDENT = "insert into student values(?,?,?,?)";
+    private String INSERT_STUDENT = "INSERT INTO student( first_Name, last_Name, email, status) VALUES (?,?,?,?)";
     private String DELETE_STUDENT = "delete from student where id_Student = ?";
     private String UPDATE_STUDENT = "update student set first_Name = ?,last_Name = ?,email = ?,status = ? where id_Student = ?";
     private String SELECT_STUDENT_BY_ID = "select * from student where id_Student = ?";
@@ -27,7 +27,6 @@ public class StudentDAOImp implements StudentDAO {
         ps.setString(2 , student.getLast_name());
         ps.setString(3 , student.getEmail());
         ps.setString(4 , student.getStatus());
-
         return ps.executeUpdate();
     }
 
