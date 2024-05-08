@@ -31,6 +31,11 @@ public class HelloController {
         // return the name of the file to be loaded "hello_world.jsp"
         return "hello_world";
     }
+    @GetMapping(value = "/show")
+    public String Show(ModelMap modelMap) throws SQLException {
+        StudentDAO st = new StudentDAOImp();
+        modelMap.addAttribute("shows",st.selectAll());
+        return "Show";
+    }
     
-
 }
