@@ -37,5 +37,22 @@ public class HelloController {
         modelMap.addAttribute("shows",st.selectAll());
         return "Show";
     }
-    
+    @GetMapping(value = "/add")
+    public String AddStudent(ModelMap modelMap){
+        modelMap.addAttribute("add","Welcome to Insert page");
+        return "AddStudent";
+    }
+    @GetMapping(value = "/edit")
+    public String EditStudent(ModelMap modelMap){
+        modelMap.addAttribute("edit","Welcome to Edit page");
+        return "EditStudent";
+    }
+    @GetMapping(value = "/delete/{id}")
+    public String DeleteStudent(@PathVariable("id") int id, ModelMap modelMap) throws SQLException {
+        StudentDAO st = new StudentDAOImp();
+        st.delete(id);
+        modelMap.addAttribute("del","Welcome to Delete page");
+        return "redirect:/show";
+    }
+
 }
