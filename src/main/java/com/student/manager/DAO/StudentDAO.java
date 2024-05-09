@@ -1,6 +1,6 @@
 package com.student.manager.DAO;
 
-import com.student.manager.model.Student;
+import com.model.Student;
 
 import java.sql.SQLException;
 import java.util.List;

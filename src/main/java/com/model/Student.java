@@ -1,4 +1,4 @@
-package com.student.manager.model;
+package com.model;
 
 public class Student {
 
@@ -8,7 +8,7 @@ public class Student {
     private String email;
     private String status;
 
-    public Student(String first_name, String last_name, String email, String status) {
+   public Student(String first_name, String last_name, String email, String status) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;

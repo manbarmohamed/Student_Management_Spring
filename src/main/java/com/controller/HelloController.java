@@ -1,23 +1,21 @@
-package com.student.manage.controller;
+package com.controller;
 
 import com.student.manager.DAO.StudentDAO;
-import com.student.manager.DAO.StudentDAOImp;
-import com.student.manager.model.Student;
+import com.model.Student;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 import java.util.List;
 
 @Controller
 public class HelloController {
 
-    private final HttpServletRequest httpServletRequest;
+    private final StudentDAO studentDAO;
 
-    public HelloController(HttpServletRequest httpServletRequest) {
-        this.httpServletRequest = httpServletRequest;
+    public HelloController(StudentDAO studentDAO) {
+        this.studentDAO = studentDAO;
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -32,8 +30,8 @@ public class HelloController {
     }
     @GetMapping(value = "/show")
     public String Show(ModelMap modelMap) throws SQLException {
-        StudentDAO st = new StudentDAOImp();
-        modelMap.addAttribute("shows",st.selectAll());
+
+        modelMap.addAttribute("shows",studentDAO.selectAll());
         return "Show";
     }
     @GetMapping(value = "/add")
@@ -48,14 +46,14 @@ public class HelloController {
                              ModelMap modelMap) throws SQLException {
 
         Student std = new Student(fname,lname,email,status);
-        StudentDAO st = new StudentDAOImp();
-        st.insert(std);
+
+        studentDAO.insert(std);
         modelMap.addAttribute("add","Welcome to Insert page");
         return "redirect:/show";
     }
     @GetMapping(value = "/edit/{id}")
     public String EditStudent(@PathVariable("id") int id, ModelMap modelMap) throws SQLException {
-        StudentDAO studentDAO = new StudentDAOImp();
+       // StudentDAO studentDAO = new StudentDAOImp();
         List<Student> students = studentDAO.selectBiId(id);
         modelMap.addAttribute("student", students);
         return "EditStudent";
@@ -67,15 +65,15 @@ public class HelloController {
                                 @RequestParam("lastName") String lname,
                                 @RequestParam("email") String email,
                                 @RequestParam("status") String status) throws SQLException {
-        StudentDAO studentDAO = new StudentDAOImp();
+        //StudentDAO studentDAO = new StudentDAOImp();
         Student std = new Student(id, fname, lname, email, status);
         studentDAO.update(std);
         return "redirect:/show";
     }
     @GetMapping(value = "/delete/{id}")
     public String DeleteStudent(@PathVariable("id") int id, ModelMap modelMap) throws SQLException {
-        StudentDAO st = new StudentDAOImp();
-        st.delete(id);
+        //StudentDAO st = new StudentDAOImp();
+        studentDAO.delete(id);
         modelMap.addAttribute("del","Welcome to Delete page");
         return "redirect:/show";
     }
