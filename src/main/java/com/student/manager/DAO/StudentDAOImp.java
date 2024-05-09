@@ -1,7 +1,8 @@
 package com.student.manager.DAO;
 
-import com.student.manage.DB.DataBaseManager;
-import com.student.manager.model.Student;
+import com.controller.DB.DataBaseManager;
+import com.model.Student;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class StudentDAOImp implements StudentDAO {
 
     private String SELECT_ALL_STUDENTS = "select * from student";

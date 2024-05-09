@@ -1,4 +1,4 @@
-package com.student.manage.DB;
+package com.controller.DB;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
