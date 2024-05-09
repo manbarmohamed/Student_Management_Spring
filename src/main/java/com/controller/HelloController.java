@@ -19,7 +19,7 @@ public class HelloController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String printHelloWorld(ModelMap modelMap){
+    public String printHelloWorld(ModelMap modelMap) {
 
         // add attribute to load modelMap
         modelMap.addAttribute("message",
@@ -28,16 +28,19 @@ public class HelloController {
         // return the name of the file to be loaded "hello_world.jsp"
         return "hello_world";
     }
+
     @GetMapping(value = "/show")
     public String Show(ModelMap modelMap) throws SQLException {
 
-        modelMap.addAttribute("shows",studentDAO.selectAll());
+        modelMap.addAttribute("shows", studentDAO.selectAll());
         return "Show";
     }
+
     @GetMapping(value = "/add")
     public String addStudentPage() {
         return "AddStudent";
     }
+
     @PostMapping(value = "/add")
     public String AddStudent(@RequestParam("firstName") String fname,
                              @RequestParam("lastName") String lname,
@@ -45,15 +48,16 @@ public class HelloController {
                              @RequestParam("status") String status,
                              ModelMap modelMap) throws SQLException {
 
-        Student std = new Student(fname,lname,email,status);
+        Student std = new Student(fname, lname, email, status);
 
         studentDAO.insert(std);
-        modelMap.addAttribute("add","Welcome to Insert page");
+        modelMap.addAttribute("add", "Welcome to Insert page");
         return "redirect:/show";
     }
+
     @GetMapping(value = "/edit/{id}")
     public String EditStudent(@PathVariable("id") int id, ModelMap modelMap) throws SQLException {
-       // StudentDAO studentDAO = new StudentDAOImp();
+        // StudentDAO studentDAO = new StudentDAOImp();
         List<Student> students = studentDAO.selectBiId(id);
         modelMap.addAttribute("student", students);
         return "EditStudent";
@@ -70,11 +74,12 @@ public class HelloController {
         studentDAO.update(std);
         return "redirect:/show";
     }
+
     @GetMapping(value = "/delete/{id}")
     public String DeleteStudent(@PathVariable("id") int id, ModelMap modelMap) throws SQLException {
         //StudentDAO st = new StudentDAOImp();
         studentDAO.delete(id);
-        modelMap.addAttribute("del","Welcome to Delete page");
+        modelMap.addAttribute("del", "Welcome to Delete page");
         return "redirect:/show";
     }
 
